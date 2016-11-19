@@ -1,5 +1,5 @@
 # flask-TODO
-This small project uses flask framework & sliqte database to manage a TODO list by sending HTTP request.
+This small project uses flask framework & sliqte database to manage a TODO list by sending HTTP request. And it has been tested with 100% code coverage.
 
 ## Get Started
 
@@ -9,15 +9,21 @@ pip install virtualenv
 virtualenv env
 source env/bin/activate
 pip install Flask
-pip install -r requirement.txt
+pip install -r requirements.txt
 ```
 
 ### Run test with 100% code coverage
 nosetests --with-coverage --cover-erase --cover-package=src --cover-html
 
+### Code convention check
+```
+cd "folder name"
+flake8
+```
+
 ### Examples
 #### Launch the server
-python manager.py runserver
+`python manager.py runserver`
 
 #### Send HTTP request
 ##### Get all TODO list
