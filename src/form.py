@@ -2,7 +2,6 @@ from wtforms import Form, StringField, BooleanField, validators, ValidationError
 
 
 def filter_done(field):
-    print '---------------{}--------------------'.format(field)
     if field == 'true':
         return True
     if field == 'false':
