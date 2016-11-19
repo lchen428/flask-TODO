@@ -12,8 +12,8 @@ pip install Flask
 pip install -r requirements.txt
 ```
 
-### Run test with 100% code coverage
-nosetests --with-coverage --cover-erase --cover-package=src --cover-html
+### Run tests
+`nosetests --with-coverage --cover-erase --cover-package=src --cover-html`
 
 ### Code convention check
 ```
