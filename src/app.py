@@ -2,7 +2,7 @@ from flask import Flask, request, jsonify, abort
 import datetime
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
-import TodoForm
+import form
 
 app = Flask(__name__)
 @app.errorhandler(400)
@@ -35,9 +35,9 @@ def get_todo_id(id):
 
 @app.route('/todo', methods=['POST'])
 def post_todo():
-    form = TodoForm.CreateTodoForm(request.form)
-    if not form.validate():
-        abort(400, form.errors)
+    myform = form.CreateTodoForm(request.form)
+    if not myform.validate():
+        abort(400, myform.errors)
 
     name = request.form['name']
     if service.get_by_name(name) is None:
@@ -50,19 +50,15 @@ def post_todo():
 
 @app.route('/todo/<int:id>', methods=['put'])
 def put_todo_id(id):
-    #name = request.form['name']
-    #done = request.form['done']
-    #updated_date = datetime.datetime.now()
-    #mytodo = Todo(id, name, done, None, updated_date)
     todo = service.get_by_id(id)
     if not todo:
             abort(404, "Id {} doesn't exist".format(id))
 
-    form = TodoForm.UpdateTodoForm(request.form)
-    if not form.validate():
-        abort(400, form.errors)
+    myform = form.UpdateTodoForm(request.form)
+    if not myform.validate():
+        abort(400, myform.errors)
 
-    form.populate_obj(todo)
+    myform.populate_obj(todo)
     todo.updated_date = datetime.datetime.now()
 
     service.update(todo)
