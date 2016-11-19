@@ -17,15 +17,6 @@ class Service:
         db.session.commit()
 
     def update(self, todo):
-        #existing_todo = self.get_by_id(todo.id)
-        #if existing_todo is not None:
-        #    existing_todo.name = todo.name
-        #    existing_todo.done = todo.done
-        #    existing_todo.updated_date = todo.updated_date
-        #    db.session.add(existing_todo)
-        #    db.session.commit()
-        #    return todo
-        #return None
         db.session.add(todo)
         db.session.commit()
         return todo
