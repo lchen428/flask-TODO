@@ -27,10 +27,11 @@ def get_todo():
 
 @app.route('/todo/<int:id>')
 def get_todo_id(id):
-    mytodo = service.get_by_id(id)
-    if mytodo is not None:
-        return jsonify(mytodo.json())
-    return 'No todo list for id', 404
+    todo = service.get_by_id(id)
+    if not todo:
+        abort(404, "Id {} doesn't exist".format(id))
+
+    return jsonify(todo.json())
 
 
 @app.route('/todo', methods=['POST'])
@@ -67,6 +68,9 @@ def put_todo_id(id):
 
 @app.route('/todo/<int:id>', methods=['DELETE'])
 def delete_todo(id):
-    if service.delete(id):
-        return " ", 204
-    return "Delete failed because of non-exisiting todo id", 404
+    todo = service.get_by_id(id)
+    if not todo:
+        abort(404, "Id {} doesn't exist".format(id))
+
+    service.delete(todo)
+    return " ", 204
